@@ -121,6 +121,7 @@ verilog: build_v  verilog_dir
 	@echo Compiling for Verilog ...
 	bsc -u -verilog $(V_DIRS) $(BSC_COMP_FLAGS) $(BSC_PATHS) -g $(TOPMODULE)  $(TOPFILE)
 	@echo Compiling for Verilog finished
+	cp verilog_dir/* $(PWD)/verification/verilog
 
 .PHONY: v_link
 v_link:  build_v  verilog_dir
