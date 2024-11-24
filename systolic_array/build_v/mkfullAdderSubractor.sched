@@ -1,0 +1,23 @@
+=== Generated schedule for mkfullAdderSubractor ===
+
+Method schedule
+---------------
+Method: sum
+Ready signal: True
+Conflict-free: sum, carry, difference, borrow
+ 
+Method: carry
+Ready signal: True
+Conflict-free: sum, carry, difference, borrow
+ 
+Method: difference
+Ready signal: True
+Conflict-free: sum, carry, difference, borrow
+ 
+Method: borrow
+Ready signal: True
+Conflict-free: sum, carry, difference, borrow
+ 
+Logical execution order: sum, carry, difference, borrow
+
+====================================================

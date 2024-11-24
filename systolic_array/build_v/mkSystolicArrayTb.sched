@@ -1,0 +1,27 @@
+=== Generated schedule for mkSystolicArrayTb ===
+
+Rule schedule
+-------------
+Rule: rl_sys_val1
+Predicate: sys_unit.RDY_a && (count_a < 4'd9)
+Blocking rules: (none)
+ 
+Rule: rl_sys_val2
+Predicate: sys_unit.RDY_b && (count_b < 4'd9)
+Blocking rules: (none)
+ 
+Rule: rl_mat_op
+Predicate: sys_unit.RDY_op_8__read &&
+	   sys_unit.RDY_op_7__read &&
+	   sys_unit.RDY_op_6__read &&
+	   sys_unit.RDY_op_5__read &&
+	   sys_unit.RDY_op_4__read &&
+	   sys_unit.RDY_op_3__read &&
+	   sys_unit.RDY_op_2__read &&
+	   sys_unit.RDY_op_1__read && sys_unit.RDY_op_0__read &&
+	   (count_a == 4'd9) && (count_b == 4'd9)
+Blocking rules: (none)
+ 
+Logical execution order: rl_sys_val1, rl_sys_val2, rl_mat_op
+
+=================================================

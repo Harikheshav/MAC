@@ -1,0 +1,33 @@
+=== Generated schedule for mkMultiplier ===
+
+Method schedule
+---------------
+Method: inp
+Ready signal: ! got_ip
+Conflict-free: op
+Conflicts: inp
+ 
+Method: op
+Ready signal: (counter == 7'd32) && got_ip && (! got_partop)
+Conflict-free: inp
+Conflicts: op
+ 
+Rule schedule
+-------------
+Rule: adder_subractor_rl_sum
+Predicate: adder_subractor_got_ip && (! adder_subractor_opReady)
+Blocking rules: rl_prod
+ 
+Rule: rl_ip
+Predicate: ((! rg_ip[32]) || (! adder_subractor_got_ip)) &&
+	   (! (counter == 7'd32)) && got_ip && (! got_partop)
+Blocking rules: (none)
+ 
+Rule: rl_prod
+Predicate: ((! rg_ip[32]) || adder_subractor_opReady) &&
+	   (! (counter == 7'd32)) && got_ip && got_partop
+Blocking rules: (none)
+ 
+Logical execution order: inp, op, rl_prod, adder_subractor_rl_sum, rl_ip
+
+============================================

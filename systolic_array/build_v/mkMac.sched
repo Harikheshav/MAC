@@ -1,0 +1,51 @@
+=== Generated schedule for mkMac ===
+
+Method schedule
+---------------
+Method: a
+Ready signal: True
+Conflict-free: b, c
+Sequenced before (restricted): a
+Sequenced after (restricted): mac_op
+ 
+Method: b
+Ready signal: True
+Conflict-free: a, c
+Sequenced before (restricted): b
+Sequenced after (restricted): mac_op
+ 
+Method: c
+Ready signal: True
+Conflict-free: a, b
+Sequenced before (restricted): c
+Sequenced after (restricted): mac_op
+ 
+Method: mac_op
+Ready signal: got_a && got_b && got_c && got_mul && adder_subractor_opReady
+Sequenced before (restricted): a, b, c
+Conflicts: mac_op
+ 
+Rule schedule
+-------------
+Rule: adder_subractor_rl_sum
+Predicate: adder_subractor_got_ip && (! adder_subractor_opReady)
+Blocking rules: (none)
+ 
+Rule: rl_mul
+Predicate: multiplier.RDY_inp && got_a && got_b && got_c && (! got_mul)
+Blocking rules: (none)
+ 
+Rule: rl_add
+Predicate: (! adder_subractor_got_ip) && multiplier.RDY_op &&
+	   got_a && got_b && got_c && (! got_mul)
+Blocking rules: (none)
+ 
+Logical execution order: mac_op,
+			 rl_mul,
+			 rl_add,
+			 a,
+			 b,
+			 c,
+			 adder_subractor_rl_sum
+
+=====================================
