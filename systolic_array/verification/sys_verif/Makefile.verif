@@ -1,0 +1,27 @@
+SIM ?= verilator
+TOPLEVEL_LANG ?= verilog
+
+PWD=$(shell pwd)
+
+# Exporting Python path for cocotb tests
+export PYTHONPATH:=$(PWD)/sys_verif:$(PYTHONPATH)
+
+# Adding all required Verilog source files
+VERILOG_SOURCES = \
+    $(PWD)/verilog/mkMac.v \
+    $(PWD)/verilog/mkfullAdderSubractor.v \
+    $(PWD)/verilog/mkMultiplier.v \
+    $(PWD)/verilog/mkSystolicArray.v 
+
+# Additional arguments for Verilator
+EXTRA_ARGS = --trace --trace-structs -Wno-TIMESCALEMOD -DBSV_NO_INITIAL_BLOCKS
+
+# Top-level module to simulate
+TOPLEVEL = mkSystolicArray
+
+# Testbench module
+MODULE := test_systolic_array
+
+# Including cocotb makefiles
+include $(shell cocotb-config --makefiles)/Makefile.sim
+
